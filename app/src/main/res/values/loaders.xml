@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="loader_autorization" type="id"/>
+    <item name="loader_user_info" type="id"/>
+    <item name="loader_user_controllers" type="id"/>
+    <item name="loader_controller_sensors" type="id"/>
+    <item name="loader_controller_stats" type="id"/>
+    <item name="loader_sensor_data" type="id"/>
+    <item name="loader_sensor_stats" type="id"/>
 </resources>

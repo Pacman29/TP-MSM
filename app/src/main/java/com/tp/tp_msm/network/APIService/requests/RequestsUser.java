@@ -12,10 +12,6 @@ import retrofit2.http.Query;
  */
 
 public interface RequestsUser {
-    @POST("/user/sign_in")
-    Call<ResponseBaseSpec> postUserSignIn(@Query("e_mail") String email,
-                                          @Query("password") String password);
-
-    @GET("/user/user_info")
+        @GET("/user/user_info")
     Call<Object> getUserInfo();
 }

@@ -32,4 +32,28 @@ public class BundleFabric {
         bundle.putString("password",password);
         return bundle;
     }
+
+    public Bundle getEmpty(){
+        return Bundle.EMPTY;
+    }
+
+    public Bundle getControllerIdBundle(String controllerId){
+        Bundle bundle = new Bundle();
+        bundle.putString("controllerId",controllerId);
+        return bundle;
+    }
+
+    public Bundle getSensorDataBundle(String sensorId, String date, Integer limit){
+        Bundle bundle = new Bundle();
+        bundle.putString("sensorId",sensorId);
+        bundle.putString("date",date);
+        bundle.putInt("limit",limit);
+        return bundle;
+    }
+
+    public Bundle getSensorStatsBundle(String sensorId){
+        Bundle bundle = new Bundle();
+        bundle.putString("sensorId",sensorId);
+        return bundle;
+    }
 }

@@ -21,8 +21,6 @@ import retrofit2.Call;
  */
 
 public class LoaderAutorization extends BaseLoader{
-    private static final Gson GSON = new GsonBuilder().create();
-
     private final String email;
     private final String password;
     public LoaderAutorization(Context context, String email, String password) {
@@ -41,11 +39,7 @@ public class LoaderAutorization extends BaseLoader{
         Response ret =  new Response();
         ret.setRequestResult(response.code());
         ResponseBody body = (ResponseBody) ((response.code() < 300) ? response.body() : response.errorBody());
-        ret.setAnswer(parser(body.string()));
+        ret.setAnswer(parser(ResponseBaseReal.class,body.string()));
         return ret;
-    }
-
-    private ResponseBaseReal parser(final String body){
-        return GSON.fromJson(body,ResponseBaseReal.class);
     }
 }

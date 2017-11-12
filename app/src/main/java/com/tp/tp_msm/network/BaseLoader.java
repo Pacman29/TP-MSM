@@ -3,6 +3,10 @@ package com.tp.tp_msm.network;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.tp.tp_msm.network.APIService.responses.ResponseBaseReal;
+
 import java.io.IOException;
 
 /**
@@ -13,7 +17,7 @@ public abstract class BaseLoader extends AsyncTaskLoader<Response> {
     public BaseLoader(Context context) {
         super(context);
     }
-
+    private static final Gson GSON = new GsonBuilder().create();
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
@@ -24,7 +28,7 @@ public abstract class BaseLoader extends AsyncTaskLoader<Response> {
     public Response loadInBackground() {
         try {
             Response response = apiCall();
-            if(response.getRequestResult() == 200){
+            if(response.getRequestResult() < 300){
                 response.save(getContext());
                 onSuccess();
             } else {
@@ -42,4 +46,8 @@ public abstract class BaseLoader extends AsyncTaskLoader<Response> {
     protected void onError(){}
 
     protected abstract Response apiCall() throws IOException;
+
+    public  <T> T parser(Class<T> type,final String body){
+        return GSON.fromJson(body,type);
+    }
 }
