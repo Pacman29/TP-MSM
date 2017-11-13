@@ -1,13 +1,18 @@
 package com.tp.tp_msm;
 
-import android.app.LoaderManager;
-import android.content.Loader;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +29,7 @@ import com.tp.tp_msm.network.loaders.LoaderSensorStats;
 import com.tp.tp_msm.network.loaders.LoaderUserControllers;
 import com.tp.tp_msm.network.loaders.LoaderUserInfo;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Response>,
+public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<Response>,
         NavigationView.OnNavigationItemSelectedListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -35,13 +40,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getLoaderManager().initLoader(R.id.loader_sensor_stats,
-                bundleFabric.getSensorStatsBundle("1"),
-                this);
+        // example send request
+
 
         //nav bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //view fragment autorization
+        this.switcher(new AutorizationFragment());
     }
 
     @Override
@@ -170,9 +178,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         int id = item.getItemId();
 
         //TODO : item switch
+        switch (id) {
+            case R.id.nav_autorization : {
+                this.switcher(new AutorizationFragment());
+                break;
+            }
+            case R.id.nav_user_info : {
+                this.switcher(new UserInfoFragment());
+                break;
+            }
+            case R.id.nav_controllers : {
+                this.switcher(new ControllersFragment());
+                break;
+            }
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public <T> void switcher(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment old = fragmentManager.findFragmentById(R.id.main_container);
+        if(old != null && old.getClass() == fragment.getClass())
+            return;
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.main_container,fragment);
+        transaction.commit();
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="026b520a2f7f3437b813ef9681933f622ca9325e">
+        <dex dex="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c2a28099291dc521c1d79b637e4db82df4000373/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e316bb295423b9e660abc24d2c3d747f2512e5ba/classes.dex" />
+    </item>
+
+</items>
