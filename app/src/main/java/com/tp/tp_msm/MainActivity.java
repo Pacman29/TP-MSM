@@ -191,6 +191,10 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
                 this.switcher(new ControllersFragment());
                 break;
             }
+            case R.id.nav_sensors : {
+                this.switcher(new SensorsFragment());
+                break;
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

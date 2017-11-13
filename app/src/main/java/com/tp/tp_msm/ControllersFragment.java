@@ -21,6 +21,7 @@ import com.tp.tp_msm.network.Response;
 import com.tp.tp_msm.network.loaders.LoaderAutorization;
 import com.tp.tp_msm.network.loaders.LoaderControllerSensors;
 import com.tp.tp_msm.network.loaders.LoaderControllerStats;
+import com.tp.tp_msm.network.loaders.LoaderUserControllers;
 import com.tp.tp_msm.network.loaders.LoaderUserInfo;
 
 import butterknife.BindView;
@@ -43,6 +44,9 @@ public class ControllersFragment extends Fragment  implements View.OnClickListen
     @BindView(R.id.text_request_controllers)
     TextView request;
 
+    @BindView(R.id.text_controllers)
+    TextView controllers;
+
     @BindView(R.id.controllerId)
     EditText controllerId;
 
@@ -61,12 +65,17 @@ public class ControllersFragment extends Fragment  implements View.OnClickListen
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_controllers, container, false);
         ButterKnife.bind(this,view);
+        getLoaderManager().initLoader(R.id.loader_user_controllers,
+                bundleFabric.getEmpty(),
+                this);
         return view;
     }
 
     @OnClick(R.id.button_get_controller_sensors)
     public void onClickButtonGetControllerSensors(){
         String controllerId = String.valueOf(this.controllerId.getText());
+        if(controllerId.equals(""))
+            return;
         getLoaderManager().initLoader(R.id.loader_controller_sensors,
                 bundleFabric.getControllerIdBundle(controllerId),
                 this);
@@ -75,6 +84,8 @@ public class ControllersFragment extends Fragment  implements View.OnClickListen
     @OnClick(R.id.button_get_controller_stats)
     public void onClickButtonGetControllerStats(){
         String controllerId = String.valueOf(this.controllerId.getText());
+        if(controllerId.equals(""))
+            return;
         getLoaderManager().initLoader(R.id.loader_controller_stats,
                 bundleFabric.getControllerIdBundle(controllerId),
                 this);
@@ -103,6 +114,9 @@ public class ControllersFragment extends Fragment  implements View.OnClickListen
             }
             case R.id.loader_controller_stats: {
                 return new LoaderControllerStats(this.getContext(),bundle.getString("controllerId"));
+            }
+            case R.id.loader_user_controllers: {
+                return new LoaderUserControllers(this.getContext());
             }
             default:
                 return null;
@@ -140,8 +154,10 @@ public class ControllersFragment extends Fragment  implements View.OnClickListen
             ResponseBaseReal error = response.getTypedAnswer();
             //Log.d(TAG,error.getMessage().getErrorMessage());
             Gson gson = new Gson();
-
-            request.setText(gson.toJson(error));
+            if(id == R.id.loader_user_controllers)
+                controllers.setText(gson.toJson(error));
+            else
+                request.setText(gson.toJson(error));
 
         }
 

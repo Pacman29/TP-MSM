@@ -19,30 +19,43 @@ import com.tp.tp_msm.network.APIService.BundleFabric;
 import com.tp.tp_msm.network.APIService.responses.ResponseBaseReal;
 import com.tp.tp_msm.network.Response;
 import com.tp.tp_msm.network.loaders.LoaderAutorization;
+import com.tp.tp_msm.network.loaders.LoaderControllerSensors;
+import com.tp.tp_msm.network.loaders.LoaderControllerStats;
+import com.tp.tp_msm.network.loaders.LoaderSensorData;
+import com.tp.tp_msm.network.loaders.LoaderSensorStats;
+import com.tp.tp_msm.network.loaders.LoaderUserControllers;
+import com.tp.tp_msm.network.loaders.LoaderUserInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AutorizationFragment extends Fragment  implements View.OnClickListener, LoaderManager.LoaderCallbacks<Response>{
+public class SensorsFragment extends Fragment  implements View.OnClickListener, LoaderManager.LoaderCallbacks<Response>{
     private View view;
     private final BundleFabric bundleFabric = BundleFabric.getInstance();
     private static final String TAG = AutorizationFragment.class.getSimpleName();
 
     private OnFragmentInteractionListener mListener;
-    @BindView(R.id.button_send_autorization)
-    Button sendButton;
 
-    @BindView(R.id.email)
-    EditText email;
+    @BindView(R.id.button_get_sensor_data)
+    Button buttonGetSensorData;
 
-    @BindView(R.id.password)
-    EditText password;
+    @BindView(R.id.button_get_sensor_stats)
+    Button buttonGetSensorStats;
 
-    @BindView(R.id.text_request)
+    @BindView(R.id.text_request_sensors)
     TextView request;
 
-    public AutorizationFragment() {
+    @BindView(R.id.date)
+    EditText date;
+
+    @BindView(R.id.limit)
+    EditText limit;
+
+    @BindView(R.id.sensorId)
+    EditText sensorId;
+
+    public SensorsFragment() {
         // Required empty public constructor
     }
 
@@ -55,20 +68,34 @@ public class AutorizationFragment extends Fragment  implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_autorization, container, false);
+        view = inflater.inflate(R.layout.fragment_sensors, container, false);
         ButterKnife.bind(this,view);
         return view;
     }
 
-    @OnClick(R.id.button_send_autorization)
-    public void onClickSendAut(){
-        String email = String.valueOf(this.email.getText());
-        String password = String.valueOf(this.password.getText());
+    @OnClick(R.id.button_get_sensor_data)
+    public void onClickButtonGetControllerSensors(){
+        String sensorId = String.valueOf(this.sensorId.getText());
+        String date = String.valueOf(this.date.getText());
+        String slimit = String.valueOf(this.limit.getText());
 
-        if(email.equals("") || password.equals(""))
+        if(sensorId.equals("") || date.equals("") || slimit.equals(""))
             return;
 
-        getLoaderManager().initLoader(R.id.loader_autorization,bundleFabric.getAutorizationBundle(email,password),this);
+        Integer limit = Integer.valueOf(slimit);
+        getLoaderManager().initLoader(R.id.loader_sensor_data,
+                bundleFabric.getSensorDataBundle(sensorId,date,limit),
+                this);
+    }
+
+    @OnClick(R.id.button_get_sensor_stats)
+    public void onClickButtonGetControllerStats(){
+        String sensorId = String.valueOf(this.sensorId.getText());
+        if(sensorId.equals(""))
+            return;
+        getLoaderManager().initLoader(R.id.loader_sensor_stats,
+                bundleFabric.getSensorStatsBundle(sensorId),
+                this);
     }
 
     @Override
@@ -89,10 +116,14 @@ public class AutorizationFragment extends Fragment  implements View.OnClickListe
     @Override
     public Loader<Response> onCreateLoader(int id, Bundle bundle) {
         switch (id) {
-            case R.id.loader_autorization: {
-                return new LoaderAutorization(this.getContext(),
-                        bundle.getString("email"),
-                        bundle.getString("password"));
+            case R.id.loader_sensor_data: {
+                return new LoaderSensorData(this.getContext(),
+                        bundle.getString("sensorId"),
+                        bundle.getString("date"),
+                        bundle.getInt("limit"));
+            }
+            case R.id.loader_sensor_stats: {
+                return new LoaderSensorStats(this.getContext(),bundle.getString("sensorId"));
             }
             default:
                 return null;
@@ -130,7 +161,6 @@ public class AutorizationFragment extends Fragment  implements View.OnClickListe
             ResponseBaseReal error = response.getTypedAnswer();
             //Log.d(TAG,error.getMessage().getErrorMessage());
             Gson gson = new Gson();
-
             request.setText(gson.toJson(error));
 
         }

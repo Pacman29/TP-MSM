@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tp.tp_msm.ControllersFragment">
+    tools:context="com.tp.tp_msm.SensorsFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,18 +11,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_controllers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <EditText
-            android:id="@+id/controllerId"
+            android:id="@+id/sensorId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="id контроллера"
+            android:hint="id сенсора"
             android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="дата"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/limit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="лимит"
+            android:inputType="number" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,26 +41,23 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_get_controller_sensors"
+                android:id="@+id/button_get_sensor_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Список сенсоров" />
+                android:text="Данные" />
 
             <Button
-                android:id="@+id/button_get_controller_stats"
+                android:id="@+id/button_get_sensor_stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Статистика" />
-
         </LinearLayout>
 
         <TextView
-            android:id="@+id/text_request_controllers"
+            android:id="@+id/text_request_sensors"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
-
 </FrameLayout>
