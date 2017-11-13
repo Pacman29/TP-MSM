@@ -29,14 +29,13 @@ public class LoaderControllerStats extends BaseLoader{
     @Override
     protected Response apiCall() throws IOException {
         APIService service = APIService.getInstance();
-        Call<Object> call = service.controllers().getControllerStats(this.controllerId);
-        retrofit2.Response<Object> response = call.execute();
+        Call<ResponseControllerStats> call = service.controllers().getControllerStats(this.controllerId);
+        retrofit2.Response<ResponseControllerStats> response = call.execute();
         Response ret =  new Response();
         ret.setRequestResult(response.code());
         ResponseBody body;
-        if(response.code() < 300) {
-            body = (ResponseBody) response.body();
-            ret.setAnswer(parser(ResponseControllerStats.class, body.string()));
+        if(response.code() < 300 && response.code() >= 200) {
+            ret.setAnswer(response.body());
         } else {
             body = (ResponseBody) response.errorBody();
             ret.setAnswer(parser(ResponseBaseReal.class, body.string()));

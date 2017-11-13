@@ -2,6 +2,7 @@ package com.tp.tp_msm.network.loaders;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.tp.tp_msm.network.APIService.APIService;
 import com.tp.tp_msm.network.APIService.requests.RequestBodyAutorization;
 import com.tp.tp_msm.network.APIService.responses.ResponseBaseReal;
@@ -26,14 +27,13 @@ public class LoaderUserInfo extends BaseLoader {
     @Override
     protected Response apiCall() throws IOException {
         APIService service = APIService.getInstance();
-        Call<Object> call = service.user().getUserInfo();
-        retrofit2.Response<Object> response = call.execute();
+        Call<ResponseUserInfo> call = service.user().getUserInfo();
+        retrofit2.Response<ResponseUserInfo> response = call.execute();
         Response ret =  new Response();
         ret.setRequestResult(response.code());
         ResponseBody body;
-        if(response.code() < 300) {
-            body = (ResponseBody) response.body();
-            ret.setAnswer(parser(ResponseUserInfo.class, body.string()));
+        if(response.code() < 300 && response.code() >= 200) {
+            ret.setAnswer( response.body());
         } else {
             body = (ResponseBody) response.errorBody();
             ret.setAnswer(parser(ResponseBaseReal.class, body.string()));

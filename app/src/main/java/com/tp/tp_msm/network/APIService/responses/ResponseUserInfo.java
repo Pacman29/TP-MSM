@@ -11,7 +11,7 @@ public class ResponseUserInfo {
 
     @SerializedName("code")
     private int code;
-    @SerializedName("msg")
+    @SerializedName("message")
     private Msg msg;
 
     public int getCode() {

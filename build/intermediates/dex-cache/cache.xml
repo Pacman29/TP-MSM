@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="e21ec511f3ce8ea0143807b41299a73a87dbcf4e">
+        sha1="54f7d72661494aab4d9ef5b81a098c73752aa2b3">
         <dex dex="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c2a28099291dc521c1d79b637e4db82df4000373/classes.dex" />
     </item>
     <item
@@ -18,6 +18,15 @@
         revision="26.0.2"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e316bb295423b9e660abc24d2c3d747f2512e5ba/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/pacman29/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.9.0/1b6c10b5120995a7542c1a31b7828fb8593c8ba/okhttp-3.9.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="01b6c10b5120995a7542c1a31b7828fb8593c8ba">
+        <dex dex="/home/pacman29/StudioProjects/TP-MSM/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.9.0_68475f4f0d0fa8739ad7edd1be3add3bed0ec033/classes.dex" />
     </item>
 
 </items>

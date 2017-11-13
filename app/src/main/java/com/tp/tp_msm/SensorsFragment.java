@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.tp.tp_msm.network.APIService.BundleFabric;
 import com.tp.tp_msm.network.APIService.responses.ResponseBaseReal;
+import com.tp.tp_msm.network.APIService.responses.ResponseSensorData;
+import com.tp.tp_msm.network.APIService.responses.ResponseSensorStats;
 import com.tp.tp_msm.network.Response;
 import com.tp.tp_msm.network.loaders.LoaderAutorization;
 import com.tp.tp_msm.network.loaders.LoaderControllerSensors;
@@ -133,27 +135,21 @@ public class SensorsFragment extends Fragment  implements View.OnClickListener, 
     @Override
     public void onLoadFinished(Loader<Response> loader, Response response) {
         int id = loader.getId();
+        // нет соединения
+        if(response.getRequestResult() == 500)
+            return;
         if(response.getRequestResult() < 300){
             switch (id) {
-                case R.id.loader_autorization:{
-                    break;
-                }
-                case R.id.loader_user_info:{
-                    break;
-                }
-                case R.id.loader_user_controllers:{
-                    break;
-                }
-                case R.id.loader_controller_sensors:{
-                    break;
-                }
-                case R.id.loader_controller_stats:{
-                    break;
-                }
                 case R.id.loader_sensor_data:{
+                    ResponseSensorData responseSensorData = response.getTypedAnswer();
+                    Gson gson = new Gson();
+                    request.setText(gson.toJson(responseSensorData));
                     break;
                 }
                 case R.id.loader_sensor_stats:{
+                    ResponseSensorStats responseSensorStats = response.getTypedAnswer();
+                    Gson gson = new Gson();
+                    request.setText(gson.toJson(responseSensorStats));
                     break;
                 }
             }

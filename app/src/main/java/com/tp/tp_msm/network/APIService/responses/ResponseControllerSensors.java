@@ -13,7 +13,7 @@ public class ResponseControllerSensors {
 
     @SerializedName("code")
     private int code;
-    @SerializedName("msg")
+    @SerializedName("message")
     private List<Msg> msg;
 
     public int getCode() {

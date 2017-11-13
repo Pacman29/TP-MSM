@@ -11,7 +11,7 @@ public class ResponseSensorStats {
 
     @SerializedName("code")
     private int code;
-    @SerializedName("msg")
+    @SerializedName("message")
     private Msg msg;
 
     public int getCode() {
@@ -32,33 +32,33 @@ public class ResponseSensorStats {
 
     public static class Stats {
         @SerializedName("current_month")
-        private int current_month;
+        private double current_month;
         @SerializedName("prev_year_month")
-        private int prev_year_month;
+        private double prev_year_month;
         @SerializedName("prev_year_average")
-        private int prev_year_average;
+        private double prev_year_average;
 
-        public int getCurrent_month() {
+        public double getCurrent_month() {
             return current_month;
         }
 
-        public void setCurrent_month(int current_month) {
+        public void setCurrent_month(double current_month) {
             this.current_month = current_month;
         }
 
-        public int getPrev_year_month() {
+        public double getPrev_year_month() {
             return prev_year_month;
         }
 
-        public void setPrev_year_month(int prev_year_month) {
+        public void setPrev_year_month(double prev_year_month) {
             this.prev_year_month = prev_year_month;
         }
 
-        public int getPrev_year_average() {
+        public double getPrev_year_average() {
             return prev_year_average;
         }
 
-        public void setPrev_year_average(int prev_year_average) {
+        public void setPrev_year_average(double prev_year_average) {
             this.prev_year_average = prev_year_average;
         }
     }

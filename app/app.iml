@@ -128,7 +128,6 @@
     <orderEntry type="library" exported="" name="com.jakewharton:butterknife-8.8.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-compat-26.1.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="com.android.support.test.espresso:espresso-core-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="com.squareup.okhttp3:okhttp:3.8.0@jar" level="project" />
     <orderEntry type="library" exported="" name="com.jakewharton:butterknife-annotations:8.8.1@jar" level="project" />
     <orderEntry type="library" exported="" name="com.google.guava:guava:23.3-android@jar" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="com.android.support.test:rules-0.5" level="project" />
@@ -144,6 +143,7 @@
     <orderEntry type="library" exported="" scope="TEST" name="javax.annotation:javax.annotation-api:1.2@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:design-26.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:transition-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.squareup.okhttp3:okhttp:3.9.0@jar" level="project" />
     <orderEntry type="library" exported="" name="com.google.j2objc:j2objc-annotations:1.1@jar" level="project" />
   </component>
 </module>

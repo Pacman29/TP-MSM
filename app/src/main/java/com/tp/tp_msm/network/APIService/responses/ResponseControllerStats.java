@@ -11,7 +11,7 @@ public class ResponseControllerStats {
 
     @SerializedName("code")
     private int code;
-    @SerializedName("msg")
+    @SerializedName("message")
     private Msg msg;
 
     public int getCode() {
@@ -36,9 +36,9 @@ public class ResponseControllerStats {
         @SerializedName("month")
         private int month;
         @SerializedName("prev_month")
-        private int prev_month;
+        private double prev_month;
         @SerializedName("prev_year")
-        private int prev_year;
+        private double prev_year;
 
         public int getController_id() {
             return controller_id;
@@ -56,19 +56,19 @@ public class ResponseControllerStats {
             this.month = month;
         }
 
-        public int getPrev_month() {
+        public double getPrev_month() {
             return prev_month;
         }
 
-        public void setPrev_month(int prev_month) {
+        public void setPrev_month(double prev_month) {
             this.prev_month = prev_month;
         }
 
-        public int getPrev_year() {
+        public double getPrev_year() {
             return prev_year;
         }
 
-        public void setPrev_year(int prev_year) {
+        public void setPrev_year(double prev_year) {
             this.prev_year = prev_year;
         }
     }

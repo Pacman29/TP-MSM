@@ -1,5 +1,9 @@
 package com.tp.tp_msm.network.APIService.requests;
 
+import com.tp.tp_msm.network.APIService.responses.ResponseControllerSensors;
+import com.tp.tp_msm.network.APIService.responses.ResponseControllerStats;
+import com.tp.tp_msm.network.APIService.responses.ResponseUserControllers;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -10,11 +14,11 @@ import retrofit2.http.Path;
 
 public interface RequestsController {
     @GET("/controller/get_user_controllers")
-    Call<Object> getUserControllers();
+    Call<ResponseUserControllers> getUserControllers();
 
     @GET("/controller/{controller_id}/get_sensors")
-    Call<Object> getSensors(@Path("controller_id") String controller_id);
+    Call<ResponseControllerSensors> getSensors(@Path("controller_id") String controller_id);
 
     @GET("/controller/{controller_id}/get_controller_stats")
-    Call<Object> getControllerStats(@Path("controller_id") String controller_id);
+    Call<ResponseControllerStats> getControllerStats(@Path("controller_id") String controller_id);
 }

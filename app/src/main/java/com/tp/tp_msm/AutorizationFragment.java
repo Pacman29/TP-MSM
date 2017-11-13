@@ -102,27 +102,15 @@ public class AutorizationFragment extends Fragment  implements View.OnClickListe
     @Override
     public void onLoadFinished(Loader<Response> loader, Response response) {
         int id = loader.getId();
+        if(response.getRequestResult() == 500)
+            return;
         if(response.getRequestResult() < 300){
             switch (id) {
                 case R.id.loader_autorization:{
-                    break;
-                }
-                case R.id.loader_user_info:{
-                    break;
-                }
-                case R.id.loader_user_controllers:{
-                    break;
-                }
-                case R.id.loader_controller_sensors:{
-                    break;
-                }
-                case R.id.loader_controller_stats:{
-                    break;
-                }
-                case R.id.loader_sensor_data:{
-                    break;
-                }
-                case R.id.loader_sensor_stats:{
+                    ResponseBaseReal responseBaseReal = response.getTypedAnswer();
+                    Gson gson = new Gson();
+
+                    request.setText(gson.toJson(responseBaseReal));
                     break;
                 }
             }

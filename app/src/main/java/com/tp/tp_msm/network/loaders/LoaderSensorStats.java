@@ -29,14 +29,13 @@ public class LoaderSensorStats extends BaseLoader {
     @Override
     protected Response apiCall() throws IOException {
         APIService service = APIService.getInstance();
-        Call<Object> call = service.sensors().getSensorStats(this.sensorId);
-        retrofit2.Response<Object> response = call.execute();
+        Call<ResponseSensorStats> call = service.sensors().getSensorStats(this.sensorId);
+        retrofit2.Response<ResponseSensorStats> response = call.execute();
         Response ret =  new Response();
         ret.setRequestResult(response.code());
         ResponseBody body;
-        if(response.code() < 300) {
-            body = (ResponseBody) response.body();
-            ret.setAnswer(parser(ResponseSensorStats.class, body.string()));
+        if(response.code() < 300 && response.code() >= 200) {
+            ret.setAnswer(response.body());
         } else {
             body = (ResponseBody) response.errorBody();
             ret.setAnswer(parser(ResponseBaseReal.class, body.string()));

@@ -51,4 +51,5 @@ public abstract class BaseLoader extends AsyncTaskLoader<Response> {
     public  <T> T parser(Class<T> type,final String body){
         return GSON.fromJson(body,type);
     }
+
 }
