@@ -84,6 +84,7 @@ public class SensorsFragment extends Fragment  implements View.OnClickListener, 
         if(sensorId.equals("") || date.equals("") || slimit.equals(""))
             return;
 
+        //TODO: падение на valueof slimit, >10 символов
         Integer limit = Integer.valueOf(slimit);
         getLoaderManager().initLoader(R.id.loader_sensor_data,
                 bundleFabric.getSensorDataBundle(sensorId,date,limit),
