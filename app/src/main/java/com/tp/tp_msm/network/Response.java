@@ -9,12 +9,13 @@ import android.support.annotation.Nullable;
  */
 
 public class Response {
-    @Nullable private Object mAnswer;
+    private Object mAnswer;
 
     private Integer mRequestResult;
 
-    public Response() {
+    public Response(@NonNull Object mAnswer) {
         mRequestResult = 500;
+        this.mAnswer = mAnswer;
     }
 
     @NonNull
@@ -27,19 +28,8 @@ public class Response {
         return this;
     }
 
-    @Nullable
     public <T> T getTypedAnswer() {
-        if (mAnswer == null) {
-            return null;
-        }
-        //noinspection unchecked
         return (T) mAnswer;
-    }
-
-    @NonNull
-    public Response setAnswer(@Nullable Object answer) {
-        mAnswer = answer;
-        return this;
     }
 
     public void save(@NonNull Context context) {

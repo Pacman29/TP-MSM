@@ -31,15 +31,16 @@ public class LoaderControllerSensors extends BaseLoader{
         APIService service = APIService.getInstance();
         Call<ResponseControllerSensors> call = service.controllers().getSensors(this.controllerId);
         retrofit2.Response<ResponseControllerSensors> response = call.execute();
-        Response ret =  new Response();
-        ret.setRequestResult(response.code());
+        Response ret;
+
         ResponseBody body;
         if(response.code() < 300 && response.code() >= 200) {
-            ret.setAnswer(response.body());
+            ret =  new Response(response.body());
         } else {
-            body = (ResponseBody) response.errorBody();
-            ret.setAnswer(parser(ResponseBaseReal.class, body.string()));
+            body = response.errorBody();
+            ret =  new Response(parser(ResponseBaseReal.class, body.string()));
         }
+        ret.setRequestResult(response.code());
         return ret;
     }
 }

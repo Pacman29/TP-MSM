@@ -39,12 +39,13 @@ public class LoaderAutorization extends BaseLoader{
         retrofit2.Response<ResponseBaseReal> response = call.execute();
 
 
-        Response ret =  new Response();
-        ret.setRequestResult(response.code());
+        Response ret;
         if(response.code() < 300 && response.code() >= 200)
-            ret.setAnswer(response.body());
+            ret =  new Response(response.body());
         else
-            ret.setAnswer(parser(ResponseBaseReal.class,response.errorBody().string()));
+            ret =  new Response(parser(ResponseBaseReal.class,response.errorBody().string()));
+
+        ret.setRequestResult(response.code());
         return ret;
     }
 }
